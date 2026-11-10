@@ -1,0 +1,35 @@
+<script is:inline>
+  const storageKey = "ui-theme";
+  const doc = document.documentElement;
+
+  function applyTheme(theme) {
+    doc.classList.remove("light", "dark");
+
+    if (theme === "system") {
+      const system = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+      doc.classList.add(system);
+    } else {
+      doc.classList.add(theme);
+    }
+  }
+
+  // Load theme immediately
+  const saved = localStorage.getItem(storageKey) || "system";
+  applyTheme(saved);
+
+  // Watch system theme changes (if user selected "system")
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", () => {
+      const current = localStorage.getItem(storageKey) || "system";
+      if (current === "system") applyTheme("system");
+    });
+
+  // Make it available globally
+  window.setTheme = (theme) => {
+    localStorage.setItem(storageKey, theme);
+    applyTheme(theme);
+  };
+</script>

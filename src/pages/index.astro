@@ -1,0 +1,102 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import { Button } from "../components/starwind/button";
+---
+
+<Layout>
+  <Navbar />
+
+  <main class="flex flex-col items-center">
+    <!-- Hero Section -->
+    <section class="w-full max-w-6xl px-4 py-20 md:py-32 flex flex-col items-center text-center">
+      <h1 class="font-title text-4xl md:text-6xl font-bold mb-6">
+        Welcome to Hatch
+      </h1>
+      <p class="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8">
+        Your tagline goes here. Describe what makes your product amazing in a few words.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <Button variant="primary" size="lg" href="https://app.htch.io">
+          Get started
+        </Button>
+        <Button variant="outline" size="lg" href="#features">
+          Learn more
+        </Button>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="w-full max-w-6xl px-4 py-20">
+      <h2 class="font-title text-3xl md:text-4xl font-bold text-center mb-12">
+        Features
+      </h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 rounded-lg border border-border bg-card">
+          <h3 class="font-title text-xl font-semibold mb-3">Feature One</h3>
+          <p class="text-muted-foreground">
+            Describe your first feature here. What problem does it solve?
+          </p>
+        </div>
+        <div class="p-6 rounded-lg border border-border bg-card">
+          <h3 class="font-title text-xl font-semibold mb-3">Feature Two</h3>
+          <p class="text-muted-foreground">
+            Describe your second feature here. What makes it special?
+          </p>
+        </div>
+        <div class="p-6 rounded-lg border border-border bg-card">
+          <h3 class="font-title text-xl font-semibold mb-3">Feature Three</h3>
+          <p class="text-muted-foreground">
+            Describe your third feature here. Why do users love it?
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="w-full max-w-6xl px-4 py-20">
+      <h2 class="font-title text-3xl md:text-4xl font-bold text-center mb-12">
+        Pricing
+      </h2>
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="p-8 rounded-lg border border-border bg-card">
+          <h3 class="font-title text-2xl font-semibold mb-2">Free</h3>
+          <p class="text-4xl font-bold mb-4">$0<span class="text-lg text-muted-foreground">/month</span></p>
+          <ul class="space-y-2 mb-6 text-muted-foreground">
+            <li>Basic features</li>
+            <li>Community support</li>
+            <li>Limited usage</li>
+          </ul>
+          <Button variant="outline" class="w-full" href="https://app.htch.io">
+            Get started
+          </Button>
+        </div>
+        <div class="p-8 rounded-lg border-2 border-primary bg-card">
+          <h3 class="font-title text-2xl font-semibold mb-2">Pro</h3>
+          <p class="text-4xl font-bold mb-4">$19<span class="text-lg text-muted-foreground">/month</span></p>
+          <ul class="space-y-2 mb-6 text-muted-foreground">
+            <li>All features</li>
+            <li>Priority support</li>
+            <li>Unlimited usage</li>
+          </ul>
+          <Button variant="primary" class="w-full" href="https://app.htch.io">
+            Get started
+          </Button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-border py-8 mt-20">
+      <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-muted-foreground">
+          &copy; 2025 Hatch. All rights reserved.
+        </p>
+        <div class="flex gap-6">
+          <a href="/privacy" class="text-muted-foreground hover:text-foreground transition-colors">Privacy</a>
+          <a href="/terms" class="text-muted-foreground hover:text-foreground transition-colors">Terms</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+</Layout>

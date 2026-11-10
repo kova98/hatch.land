@@ -1,0 +1,158 @@
+---
+import { Button } from "./starwind/button";
+import ThemeToggle from "./ThemeToggle.astro";
+import { Menu, X } from "@lucide/astro";
+
+const navLinks = [
+  { href: "/#features", label: "Features" },
+  { href: "/#pricing", label: "Pricing" },
+];
+---
+
+<nav
+  class="items-center justify-between w-full h-16 p-4 flex flex-row relative"
+>
+  <a href="/" class="flex items-center gap-2">
+    <div
+      class="flex aspect-square size-10 md:size-8 items-center justify-center rounded-lg"
+    >
+      <img
+        src="/logo.svg"
+        alt="Hatch"
+        class="object-contain"
+      />
+    </div>
+    <span
+      class="font-title text-logo dark:text-primary-foreground text-xl font-bold"
+    >
+      Hatch
+    </span>
+  </a>
+
+  <div class="hidden md:flex gap-6">
+    {
+      navLinks.map((link) => (
+        <Button variant="ghost" href={link.href}>
+          {link.label}
+        </Button>
+      ))
+    }
+  </div>
+
+  <div class="flex flex-row gap-4 items-center">
+    <ThemeToggle />
+    <div class="hidden md:block">
+      <Button
+        id="navbar-cta"
+        size="sm"
+        variant="primary"
+        href="https://app.htch.io"
+      >
+        Get started
+      </Button>
+    </div>
+
+    <!-- Mobile menu button -->
+    <button
+      id="mobile-menu-button"
+      class="md:hidden p-2 rounded-md hover:bg-muted transition-colors"
+      aria-label="Toggle mobile menu"
+    >
+      <Menu size={24} id="menu-icon" />
+      <X size={24} id="close-icon" class="hidden" />
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu overlay -->
+<div id="mobile-menu" class="fixed inset-0 bg-background z-50 md:hidden hidden">
+  <div class="flex flex-col h-full">
+    <!-- Mobile menu header -->
+    <div
+      class="flex items-center justify-between w-full h-16 p-4 border-b border-border"
+    >
+      <a href="/" class="flex items-center gap-2">
+        <div
+          class="flex aspect-square size-10 items-center justify-center rounded-lg"
+        >
+          <img
+            src="/logo.svg"
+            alt="Hatch"
+            class="object-contain"
+          />
+        </div>
+        <span
+          class="font-title text-logo dark:text-primary-foreground text-xl font-bold"
+        >
+          Hatch
+        </span>
+      </a>
+      <button
+        id="mobile-menu-close"
+        class="p-2 rounded-md hover:bg-muted transition-colors"
+        aria-label="Close mobile menu"
+      >
+        <X size={24} />
+      </button>
+    </div>
+
+    <!-- Mobile menu content -->
+    <div class="flex flex-col gap-2 p-4 flex-grow">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="mobile-menu-link text-lg py-4 px-4 rounded-md hover:bg-muted transition-colors"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <div class="mt-4">
+        <Button
+          id="mobile-navbar-cta"
+          size="lg"
+          variant="primary"
+          href="https://app.htch.io"
+          class="w-full"
+        >
+          Get started
+        </Button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileMenuClose = document.getElementById("mobile-menu-close");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
+
+    function openMobileMenu() {
+      mobileMenu?.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeMobileMenu() {
+      mobileMenu?.classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+
+    mobileMenuButton?.addEventListener("click", openMobileMenu);
+    mobileMenuClose?.addEventListener("click", closeMobileMenu);
+
+    // Close menu when clicking on a link
+    mobileMenuLinks.forEach((link) => {
+      link.addEventListener("click", closeMobileMenu);
+    });
+
+    // Close menu on escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !mobileMenu?.classList.contains("hidden")) {
+        closeMobileMenu();
+      }
+    });
+  });
+</script>

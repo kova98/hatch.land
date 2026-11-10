@@ -1,0 +1,53 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { tv, type VariantProps } from "tailwind-variants";
+
+interface Props
+  extends HTMLAttributes<"button">,
+    Omit<HTMLAttributes<"a">, "type">,
+    VariantProps<typeof button> {}
+
+const { variant, size, class: className, ...rest } = Astro.props;
+
+export const button = tv({
+  base: [
+    "inline-flex items-center justify-center gap-1.5 rounded-md font-medium whitespace-nowrap",
+    "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+    "transition-colors duration-200",
+    "focus-visible:outline-2 focus-visible:outline-offset-2",
+    "disabled:pointer-events-none disabled:opacity-50",
+  ],
+  variants: {
+    variant: {
+      default:
+        "bg-foreground text-background hover:bg-foreground/90 focus-visible:outline-outline",
+      primary:
+        "bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:outline-primary border-b-black/30 outline-black outline shadow-sm border-b-2 ",
+      secondary:
+        "bg-secondary text-secondary-foreground hover:bg-secondary/90 focus-visible:outline-secondary",
+      outline:
+        "border-border hover:bg-border hover:text-foreground focus-visible:outline-outline border shadow-border shadow-2xs",
+      ghost:
+        "hover:bg-foreground/10 hover:text-foreground focus-visible:outline-outline bg-transparent",
+      link: "text-primary underline-offset-4 hover:underline",
+    },
+    size: {
+      sm: "h-9 px-3 py-2 text-sm",
+      md: "h-11 px-4 py-2 text-base",
+      lg: "h-12 px-8 py-2 text-lg",
+      icon: "h-11 w-11",
+    },
+  },
+  defaultVariants: { variant: "default", size: "md" },
+});
+
+const Tag = Astro.props.href ? "a" : "button";
+---
+
+<Tag
+  class={button({ variant, size, class: className })}
+  data-slot="button"
+  {...rest}
+>
+  <slot />
+</Tag>

@@ -1,0 +1,28 @@
+---
+import { Sun, Moon } from "@lucide/astro";
+---
+
+<div client:load>
+  <button
+    id="theme-toggle"
+    class="p-2 rounded-md hover:bg-muted hover:cursor-pointer"
+  >
+    <Sun class="hidden dark:block" />
+    <Moon class="block dark:hidden" />
+  </button>
+
+  <script>
+    const btn = document.getElementById("theme-toggle");
+
+    function currentTheme() {
+      return document.documentElement.classList.contains("dark")
+        ? "dark"
+        : "light";
+    }
+
+    btn.onclick = () => {
+      const next = currentTheme() === "dark" ? "light" : "dark";
+      window.setTheme(next);
+    };
+  </script>
+</div>
